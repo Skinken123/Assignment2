@@ -20,6 +20,7 @@ public class SynonymHandler
 public static String[] readSynonymData (String synonymFile) throws IOException
     {
         BufferedReader reader = new BufferedReader(new FileReader(synonymFile));
+
         int numberOfLines = 0;
         String synonymLine = reader.readLine();
 
@@ -28,7 +29,6 @@ public static String[] readSynonymData (String synonymFile) throws IOException
         numberOfLines++;
         synonymLine = reader.readLine();
         }
-
         reader.close();
 
         String[] synonymData = new String[numberOfLines];
@@ -42,12 +42,11 @@ public static String[] readSynonymData (String synonymFile) throws IOException
         return synonymData;
     }
 
-    // writeSynonymData writes a given synonym data to a given
-    // file
+    // writeSynonymData writes a given synonym data to a given file
     public static void writeSynonymData (String[] synonymData, String synonymFile) throws IOException
     {
         PrintWriter writer = new PrintWriter(synonymFile);
-        for (String synonymLine : synonymData)
+        for (String synonymLine : synonymData)//foreach loop
         {
         writer.println(synonymLine);
         }
@@ -55,10 +54,8 @@ public static String[] readSynonymData (String synonymFile) throws IOException
         writer.close();
     }
 
-    // synonymLineIndex accepts synonym data, and returns the
-    // index of the synonym line corresponding to a given word.
-    // If the given word is not present, an exception of
-    // the type IllegalArgumentException is thrown.
+    // synonymLineIndex accepts synonym data, and returns the index of the synonym line corresponding to a given word.
+    // If the given word is not present, an exception of the type IllegalArgumentException is thrown.
     private static int synonymLineIndex (String[] synonymData, String word) throws IllegalArgumentException
     {
         int delimiterIndex = 0;
@@ -88,18 +85,15 @@ public static String[] readSynonymData (String synonymFile) throws IOException
         return i;
     }
 
-    // getSynonymLine accepts synonym data, and returns
-    // the synonym line corresponding to a given word.
-    // If the given word is not present, an exception of
-    // the type IllegalArgumentException is thrown.
+    // getSynonymLine accepts synonym data, and returns the synonym line corresponding to a given word.
+    // If the given word is not present, an exception of the type IllegalArgumentException is thrown.
     public static String getSynonymLine (String[] synonymData, String word) throws IllegalArgumentException
     {
-    int index = synonymLineIndex(synonymData, word);
-    return synonymData[index];
+        int index = synonymLineIndex(synonymData, word);
+        return synonymData[index];
     }
 
-    // addSynonymLine accepts synonym data, and adds a given
-    // synonym line to the data.
+    // addSynonymLine accepts synonym data, and adds a given synonym line to the data.
     public static String[] addSynonymLine (String[] synonymData, String synonymLine)
     {
         String[] synData = new String[synonymData.length + 1];
@@ -113,13 +107,23 @@ public static String[] readSynonymData (String synonymFile) throws IOException
         return synData;
     }
 
-    // removeSynonymLine accepts synonym data, and removes
-    // the synonym line corresponding to a given word.
-    // If the given word is not present, an exception of
-    // the type IllegalArgumentException is thrown.
+    // removeSynonymLine accepts synonym data, and removes the synonym line corresponding to a given word.
+    // If the given word is not present, an exception of the type IllegalArgumentException is thrown.
     public static String[] removeSynonymLine (String[] synonymData, String word) throws IllegalArgumentException
     {
-    // add code here
+        String[] synData = new String[synonymData.length -1];
+        int index = synonymLineIndex(synonymData, word); 
+
+        int newArrayIndex = 0;
+        for (int i = 0; i < synonymData.length; i++)
+        {
+            if(index!=i)
+            {
+            synData[newArrayIndex++] = synonymData[i];
+            }
+        }
+        
+        return synData;
     }
 
     // getSynonyms returns synonyms in a given synonym line.
@@ -128,43 +132,40 @@ public static String[] readSynonymData (String synonymFile) throws IOException
     // add code here
     }
 
-    // addSynonym accepts synonym data, and adds a given
-    // synonym for a given word.
-    // If the given word is not present, an exception of
-    // the type IllegalArgumentException is thrown.
+    // addSynonym accepts synonym data, and adds a given synonym for a given word.
+    // If the given word is not present, an exception of the type IllegalArgumentException is thrown.
     public static void addSynonym (String[] synonymData, String word, String synonym) throws IllegalArgumentException
     {
-    // add code here
+        int index = synonymLineIndex(synonymData, word); 
+        synonymData[index] += ", " + synonym;
     }
 
-    // removeSynonym accepts synonym data, and removes a given
-    // synonym for a given word.
-    // If the given word or the given synonym is not present, an
-    // exception of the type IllegalArgumentException is thrown.
-    // If there is only one synonym for the given word, an
-    // exception of the type IllegalStateException is thrown.
-    public static void removeSynonym (String[] synonymData, String word, String synonym)
-    throws IllegalArgumentException, IllegalStateException
+    // removeSynonym accepts synonym data, and removes a given synonym for a given word.
+    // If the given word or the given synonym is not present, an exception of the type IllegalArgumentException is thrown.
+    // If there is only one synonym for the given word, an exception of the type IllegalStateException is thrown.
+    public static void removeSynonym (String[] synonymData, String word, String synonym) throws IllegalArgumentException, IllegalStateException
     {
-    // add code here
+        int index = synonymLineIndex(synonymData, word); 
+        String line = synonymData[index].toString();
+
+        line.replaceAll(synonym, "");
+        line.replaceAll(",,", ",");
+        synonymData[index] = line;
     }
 
-    // sortIgnoreCase sorts an array of strings, using
-    // the selection sort algorithm
+    // sortIgnoreCase sorts an array of strings, using the selection sort algorithm
     private static void sortIgnoreCase (String[] strings)
     {
     // add code here
     }
 
-    // sortSynonymLine accepts a synonym line, and sorts
-    // the synonyms in this line
+    // sortSynonymLine accepts a synonym line, and sorts the synonyms in this line
     private static String sortSynonymLine (String synonymLine)
     {
     // add code here
     }
     
-    // sortSynonymData accepts synonym data, and sorts its
-    // synonym lines and the synonyms in these lines
+    // sortSynonymData accepts synonym data, and sorts its synonym lines and the synonyms in these lines
     public static void sortSynonymData (String[] synonymData)
     {
     // add code here
