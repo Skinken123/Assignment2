@@ -1,4 +1,4 @@
-beautiful | appealing, charming, graceful, lovely, pretty
-glowing | flaming, gleaming, luminous, vibrant
-merciful | charitable, compassionate, forgiving, kindly
-powerful | energetic, forceful, mighty, vigorous
+beautiful  |  lovely, appealing, charming, graceful, pretty
+glowing  |  luminous, flaming, gleaming, vibrant
+merciful  |  kindly, charitable, compassionate, forgiving
+powerful  |  mighty, energetic, forceful, vigorous

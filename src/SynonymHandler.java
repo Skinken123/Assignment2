@@ -127,10 +127,10 @@ public static String[] readSynonymData (String synonymFile) throws IOException
     }
 
     // getSynonyms returns synonyms in a given synonym line.
-    private static String[] getSynonyms (String synonymLine)
-    {
+    //private static String[] getSynonyms (String synonymLine)
+    //{
     // add code here
-    }
+    //}
 
     // addSynonym accepts synonym data, and adds a given synonym for a given word.
     // If the given word is not present, an exception of the type IllegalArgumentException is thrown.
@@ -146,28 +146,73 @@ public static String[] readSynonymData (String synonymFile) throws IOException
     public static void removeSynonym (String[] synonymData, String word, String synonym) throws IllegalArgumentException, IllegalStateException
     {
         int index = synonymLineIndex(synonymData, word); 
-        String line = synonymData[index].toString();
+        String line = synonymData[index];
 
-        line.replaceAll(synonym, "");
-        line.replaceAll(",,", ",");
+        line = line.replaceAll(synonym, "");
+        line = line.replaceAll(",,", ",");
+        line = line.replaceAll(" , ", " ");
         synonymData[index] = line;
     }
 
     // sortIgnoreCase sorts an array of strings, using the selection sort algorithm
     private static void sortIgnoreCase (String[] strings)
     {
-    // add code here
+        //add code here
     }
 
     // sortSynonymLine accepts a synonym line, and sorts the synonyms in this line
     private static String sortSynonymLine (String synonymLine)
     {
-    // add code here
+        int index = synonymLine.indexOf('|');
+        String s1 = synonymLine.substring(0, index);
+        String s2 = synonymLine.substring(index + 1);
+        String[] str3 = s2.split(", ");
+        boolean s;
+        int n = str3.length;
+
+        do 
+        {
+            s = false;
+            for (int i = 0; i < n-1; i++) 
+            {
+                if (str3[i].compareTo(str3[i+1]) > 0) 
+                {
+                    String temp = str3[i];
+                    str3[i] = str3[i+1];
+                    str3[i+1] = temp;
+                    s = true;
+                }
+            }
+        } while (s);
+
+        String finals2 = String.join(", ",str3);
+        String finalLine = s1 + " | " + finals2;
+        return finalLine;
     }
     
     // sortSynonymData accepts synonym data, and sorts its synonym lines and the synonyms in these lines
     public static void sortSynonymData (String[] synonymData)
     {
-    // add code here
+        for (int i = 0; i<synonymData.length; i++)
+        {
+            synonymData[i] = sortSynonymLine(synonymData[i]);
+        }
+
+        int n2 = synonymData.length;
+        boolean s;
+        do 
+        {
+            s = false;
+            for (int i = 1; i < n2; i++) 
+            {
+                if (synonymData[i - 1].compareTo(synonymData[i]) > 0) 
+                {
+                    String temp = synonymData[i - 1];
+                    synonymData[i - 1] = synonymData[i];
+                    synonymData[i] = temp;
+                    s = true;
+                }
+            }
+        } while (s);
     }
 }
