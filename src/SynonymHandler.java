@@ -166,7 +166,7 @@ public static String[] readSynonymData (String synonymFile) throws IOException
         {
             int minIndex = i;
 
-            // Find the index of the minimum element in the unsorted part
+            // Find the index of the minimum element 
             for (int j = i + 1; j < n; j++) 
             {
                 if (strings[j].compareTo(strings[minIndex]) < 0) 
@@ -175,7 +175,7 @@ public static String[] readSynonymData (String synonymFile) throws IOException
                 }
             }
 
-            // Swap the found minimum element with the first element in the unsorted part
+            // Swap the found minimum element with the first element 
             if (minIndex != i)
             {
                 String temp = strings[i];
