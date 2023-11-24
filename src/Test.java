@@ -9,88 +9,67 @@ public class Test
         String test = testA[0];
         System.out.println(test);
 
-        test = sortSynonymLinee(test);   
-        System.out.println(test);   
-        System.out.println("");            
-        
-        for (int i = 0; i < testA.length; i++) 
+        String testArray[] = getSynonyms(test);
+        for (String element : testArray) 
         {
-            String line = testA[i];
-            line = line.replaceAll(",", "");
-            testA[i] = line;
-            int index = line.indexOf('|');
-            //String s1 = line.substring(0, index);
-            String s2 = line.substring(index + 1);
-            String[] str3 = s2.split(", ");
-            for(String element :str3)
-            {
-                System.out.println(element);
-            }
+            System.out.print(element + " ");
         }
-
-        bubbleSort(testA);
 
         // Print the modified array
-        for (String element : testA) 
-        {
-            System.out.println(element);
-        }
+        //for (String element : testA) 
+        //{
+       //     System.out.println(element);
+       // }
     }
 
 
-    public static void bubbleSort(String[] arr) 
-    {
-        int n = arr.length;
-        boolean swapped;
-
-        do 
-        {
-            swapped = false;
-            for (int i = 1; i < n; i++) 
-            {
-                if (arr[i - 1].compareTo(arr[i]) > 0) 
-                {
-                    // Swap arr[i-1] and arr[i]
-                    String temp = arr[i - 1];
-                    arr[i - 1] = arr[i];
-                    arr[i] = temp;
-                    swapped = true;
-                }
-            }
-        } while (swapped);
-    }
+    
 
     private static String sortSynonymLinee (String synonymLine)
     {
         int index = synonymLine.indexOf('|');
         String s1 = synonymLine.substring(0, index);
-        String s2 = synonymLine.substring(index + 1);
-        String[] str3 = s2.split(", ");
-        boolean s;
-        int n = str3.length;
+        String str3[] = getSynonyms(synonymLine);
+        sortIgnoreCase(str3);
 
-        System.out.println(s1);
-        System.out.println(s2);
-
-        do 
-        {
-            s = false;
-            for (int i = 0; i < n-1; i++) 
-            {
-                if (str3[i].compareTo(str3[i+1]) > 0) 
-                {
-                    String temp = str3[i];
-                    str3[i] = str3[i+1];
-                    str3[i+1] = temp;
-                    s = true;
-                }
-            }
-        } while (s);
-
-        String finals2 = String.join(", ",str3);
-        String finalLine = s1 + " | " + finals2;
+       // String finals2 = String.join(", ",str3);
+        String finalLine = s1 + " | " + String.join(", ",str3);
         return finalLine;
     }
+    private static String[] getSynonyms (String synonymLine)
+    {
+        int index = synonymLine.indexOf('|');
+        String s2 = synonymLine.substring(index + 2);
+        String[] str3 = s2.split(", ");
+
+        return str3;
+    }
+    private static void sortIgnoreCase (String[] strings)
+    {
+        int n = strings.length;
+        for (int i = 0; i < n - 1; i++) 
+        {
+            int minIndex = i;
+
+            // Find the index of the minimum element in the unsorted part
+            for (int j = i + 1; j < n; j++) 
+            {
+                if (strings[j].compareTo(strings[minIndex]) < 0) 
+                {
+                    minIndex = j;
+                }
+            }
+
+            // Swap the found minimum element with the first element in the unsorted part
+            if (minIndex != i)
+            {
+                String temp = strings[i];
+                strings[i] = strings[minIndex];
+                strings[minIndex] = temp;
+            }
+        }
+    }
+    
 }
 
 
