@@ -51,7 +51,6 @@ public class SynonymUser {
         for (String synonymLine : synonymData)
         {
             out.println(synonymLine);
-            //out.println("");
         }  
     }
 }

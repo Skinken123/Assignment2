@@ -50,7 +50,6 @@ public static String[] readSynonymData (String synonymFile) throws IOException
         {
         writer.println(synonymLine);
         }
-
         writer.close();
     }
 
@@ -152,9 +151,7 @@ public static String[] readSynonymData (String synonymFile) throws IOException
         int index = synonymLineIndex(synonymData, word); 
         String line = synonymData[index];
 
-        line = line.replaceAll(synonym, "");
-        line = line.replaceAll(",,", ",");
-        line = line.replaceAll(" , ", " ");
+        line = line.replaceAll(synonym, "").replaceAll(",,", ",").replaceAll(" , ", " ");
         synonymData[index] = line;
     }
 
@@ -193,7 +190,6 @@ public static String[] readSynonymData (String synonymFile) throws IOException
         String str3[] = getSynonyms(synonymLine);
         sortIgnoreCase(str3);
 
-       // String finals2 = String.join(", ",str3);
         String finalLine = s1 + " | " + String.join(", ",str3);
         return finalLine;
     }
