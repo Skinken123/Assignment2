@@ -22,20 +22,6 @@ public class Test
        // }
     }
 
-
-    
-
-    private static String sortSynonymLinee (String synonymLine)
-    {
-        int index = synonymLine.indexOf('|');
-        String s1 = synonymLine.substring(0, index);
-        String str3[] = getSynonyms(synonymLine);
-        sortIgnoreCase(str3);
-
-       // String finals2 = String.join(", ",str3);
-        String finalLine = s1 + " | " + String.join(", ",str3);
-        return finalLine;
-    }
     private static String[] getSynonyms (String synonymLine)
     {
         int index = synonymLine.indexOf('|');
@@ -43,31 +29,6 @@ public class Test
         String[] str3 = s2.split(", ");
 
         return str3;
-    }
-    private static void sortIgnoreCase (String[] strings)
-    {
-        int n = strings.length;
-        for (int i = 0; i < n - 1; i++) 
-        {
-            int minIndex = i;
-
-            // Find the index of the minimum element in the unsorted part
-            for (int j = i + 1; j < n; j++) 
-            {
-                if (strings[j].compareTo(strings[minIndex]) < 0) 
-                {
-                    minIndex = j;
-                }
-            }
-
-            // Swap the found minimum element with the first element in the unsorted part
-            if (minIndex != i)
-            {
-                String temp = strings[i];
-                strings[i] = strings[minIndex];
-                strings[minIndex] = temp;
-            }
-        }
     }
     
 }
