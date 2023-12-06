@@ -150,16 +150,44 @@ public static String[] readSynonymData (String synonymFile) throws IOException
     {
         int index = synonymLineIndex(synonymData, word); 
         String line = synonymData[index];
-        String[] getLength = getSynonyms(line);
+        String[] getLength = getSynonyms(line); 
+        int index2 = line.indexOf('|');
+        String s1 = line.substring(0, index2);
+        boolean synonymPresent = false;
 
-        if (getLength.length==1)
+        for (String s : getLength)
+        {
+            if (s.equals(synonym))
+            {
+                synonymPresent = true;
+            }
+        }
+        if (synonymPresent == false)
+        {
+            throw new IllegalArgumentException("Synonym not present");
+        }
+        else if (getLength.length==1)
         {
             throw new IllegalStateException("There is only one synonym for this word");
         }
         else
         {
-            line = line.replaceAll(synonym, "").replaceAll(",,", ",").replaceAll(" , ", " ");
-            synonymData[index] = line;
+            String[] lineWithRemovedWord = new String[getLength.length-1];
+            int i = 0;
+            for(String string : getLength)
+            {
+                if(string.equals(synonym))
+                {
+
+                }
+                else
+                {
+                    lineWithRemovedWord[i] = string;
+                    i++;
+                }
+            }
+            String finalLine = s1 + " | " + String.join(", ",lineWithRemovedWord);
+            synonymData[index] = finalLine;
         }  
     }
 
