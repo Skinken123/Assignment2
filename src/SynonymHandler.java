@@ -150,9 +150,17 @@ public static String[] readSynonymData (String synonymFile) throws IOException
     {
         int index = synonymLineIndex(synonymData, word); 
         String line = synonymData[index];
+        String[] getLength = getSynonyms(line);
 
-        line = line.replaceAll(synonym, "").replaceAll(",,", ",").replaceAll(" , ", " ");
-        synonymData[index] = line;
+        if (getLength.length==1)
+        {
+            throw new IllegalStateException("There is only one synonym for this word");
+        }
+        else
+        {
+            line = line.replaceAll(synonym, "").replaceAll(",,", ",").replaceAll(" , ", " ");
+            synonymData[index] = line;
+        }  
     }
 
     // sortIgnoreCase sorts an array of strings, using the selection sort algorithm
